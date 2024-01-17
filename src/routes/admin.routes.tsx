@@ -3,12 +3,18 @@ import AdminDashboard from "../admin/AdminDashboard";
 import CreateAdmin from "../admin/CreateAdmin";
 import CreateFaculty from "../admin/CreateFaculty";
 import CreateStudent from "../admin/CreateStudent";
+import { NavLink } from "react-router-dom";
 
-type TChild = {
+type TSidebarItem = {
+    key: string;
+    label: ReactNode,
+    children?: TSidebarItem[]
+}
+type TRoute = {
     path: string;
     element: ReactNode;
 }
-export const adminPath2 = [
+export const adminPaths = [
     {
         name: 'Dashboard',
         path: 'dashboard',
@@ -38,8 +44,8 @@ export const adminPath2 = [
 ]
 
 
-//Programetically admin routes
-export const adminRoutes = adminPath2.reduce((acc: TChild[], item) => {
+//Programmatically admin routes
+export const adminRoutes = adminPaths.reduce((acc: TRoute[], item) => {
     if (item.path && item.element) {
         acc.push({
             path: item.path,
@@ -75,3 +81,29 @@ export const adminRoutes = adminPath2.reduce((acc: TChild[], item) => {
 //         element: <CreateStudent />
 //     },
 // ]
+
+//Programmatically admin routes
+export const adminSideBar = adminPaths.reduce((acc: TSidebarItem[], item) => {
+    if (item.path && item.name) {
+        console.log(item.path);
+        acc.push({
+            key: item.name,
+            label: <NavLink to={`/admin/${item.path}`}>{item.name}</NavLink>
+        })
+    }
+
+    if (item.children) {
+        acc.push({
+            key: item.name,
+            label: item.name,
+            children: item.children.map(child => ({
+                key: child.name,
+                label: <NavLink to={`/admin/${child.path}`}>{child.name}</NavLink>
+            }))
+        })
+    }
+
+    return acc
+}, [])
+
+console.log({ adminSideBar });

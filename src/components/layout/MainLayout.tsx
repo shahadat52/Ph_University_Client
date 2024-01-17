@@ -2,6 +2,7 @@
 import { Layout, Menu, theme, MenuProps } from 'antd';
 import { NavLink, Outlet } from 'react-router-dom';
 import { sidebarMenu } from '../../routes/sidebar.routes';
+import { adminSideBar } from '../../routes/admin.routes';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -12,17 +13,7 @@ const { Header, Content, Footer, Sider } = Layout;
 //         label: `nav ${index + 1}`,
 //     }),
 // );
-const items: MenuProps['items'] = [
-    {
-        key: 'Dashboard',
-        label: <NavLink to='/admin/dashboard'>Dashboard</NavLink>
-    },
-    {
-        key: 'User Management',
-        label: 'User Management',
-        children:sidebarMenu
-    },
-]
+const items: MenuProps['items'] = adminSideBar
 
 
 
@@ -53,7 +44,7 @@ const MainLayout = () => {
                 }}>
                     <h1>PH-UNI</h1>
                 </div>
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
+                <Menu  theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
             </Sider>
             <Layout style={{ height: '100vh' }}>
                 <Header style={{ padding: 0, }} />
