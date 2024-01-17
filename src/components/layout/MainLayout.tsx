@@ -1,6 +1,7 @@
-// import React from 'react';
 // import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme, MenuProps } from 'antd';
+import { NavLink, Outlet } from 'react-router-dom';
+import { sidebarMenu } from '../../routes/sidebar.routes';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -13,26 +14,13 @@ const { Header, Content, Footer, Sider } = Layout;
 // );
 const items: MenuProps['items'] = [
     {
-        key: '1',
-        label: 'Dashboard'
+        key: 'Dashboard',
+        label: <NavLink to='/admin/dashboard'>Dashboard</NavLink>
     },
     {
-        key: '2',
-        label: 'Profile'
-    },
-    {
-        key: '3',
-        label: 'Management',
-        children: [
-            {
-                key: '4',
-                label: 'Create Student'
-            },
-            {
-                key: '5',
-                label: 'Create Faculty'
-            },
-        ]
+        key: 'User Management',
+        label: 'User Management',
+        children:sidebarMenu
     },
 ]
 
@@ -78,7 +66,7 @@ const MainLayout = () => {
                             // backgroundColor: 'green'
                         }}
                     >
-                        <h1>Programming Hero University Management</h1>
+                        <Outlet />
                     </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
