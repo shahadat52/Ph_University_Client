@@ -2,10 +2,11 @@ import { Layout, Menu } from 'antd';
 import { sideBarNavigation } from '../utils/sideBarNavigation';
 import { adminItems } from '../routes/admin.routes';
 import { facultyItems } from '../routes/faculty.items';
+import { studentItems } from '../routes/student.items';
 const { Sider } = Layout;
 const SideBar = () => {
 
-    const role = 'faculty'
+    const role = 'student'
     const roles = {
         ADMIN: 'admin',
         FACULTY: 'faculty',
@@ -21,7 +22,7 @@ const SideBar = () => {
             userRole = sideBarNavigation(facultyItems, role);
             break;
         case roles.STUDENT:
-            userRole = sideBarNavigation(facultyItems, role);
+            userRole = sideBarNavigation(studentItems, role);
             break;
         default:
             break;
