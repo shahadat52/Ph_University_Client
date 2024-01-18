@@ -2,16 +2,29 @@ import { NavLink } from "react-router-dom";
 
 export const sidebarMenu = [
     {
-        key: 'Create admin',
-        label: <NavLink to='/admin/create-admin'>Create admin</NavLink>
+        name: 'Dashboard',
+        path: 'dashboard',
+        element: <AdminDashboard />
     },
     {
-        key: 'Create Faculty',
-        label: <NavLink to='/admin/create-faculty'>Create Faculty</NavLink>
+        name: 'User Management',
+        children: [
+            {
+                name: 'Create admin',
+                path: 'create-admin',
+                element: <CreateAdmin />
+            },
+            {
+                name: 'Create faculty',
+                path: 'create-faculty',
+                element: <CreateFaculty />
+            },
+            {
+                name: 'Create student',
+                path: 'create-student',
+                element: <CreateStudent />
+            },
+        ]
     },
-    {
-        key: 'Create Student',
-        label: <NavLink to='/admin/create-student'>Create student</NavLink>
-    }
 
 ]

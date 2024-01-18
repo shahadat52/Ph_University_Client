@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import AdminDashboard from "../admin/AdminDashboard";
-import CreateAdmin from "../admin/CreateAdmin";
-import CreateFaculty from "../admin/CreateFaculty";
-import CreateStudent from "../admin/CreateStudent";
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import CreateAdmin from "../pages/admin/CreateAdmin";
+import CreateFaculty from "../pages/admin/CreateFaculty";
+import CreateStudent from "../pages/admin/CreateStudent";
 import { NavLink } from "react-router-dom";
 
 type TSidebarItem = {
@@ -14,7 +14,9 @@ type TRoute = {
     path: string;
     element: ReactNode;
 }
-export const adminPaths = [
+
+
+export const adminItems = [
     {
         name: 'Dashboard',
         path: 'dashboard',
@@ -45,7 +47,7 @@ export const adminPaths = [
 
 
 //Programmatically admin routes
-export const adminRoutes = adminPaths.reduce((acc: TRoute[], item) => {
+export const adminRoutes = adminItems.reduce((acc: TRoute[], item) => {
     if (item.path && item.element) {
         acc.push({
             path: item.path,
@@ -82,8 +84,8 @@ export const adminRoutes = adminPaths.reduce((acc: TRoute[], item) => {
 //     },
 // ]
 
-//Programmatically admin routes
-export const adminSideBar = adminPaths.reduce((acc: TSidebarItem[], item) => {
+//Programmatically sideBar navigation routes
+export const adminSideBar = adminItems.reduce((acc: TSidebarItem[], item) => {
     if (item.path && item.name) {
         console.log(item.path);
         acc.push({
