@@ -16,13 +16,13 @@ const SideBar = () => {
     switch (role) {
 
         case roles.ADMIN:
-            userRole = sideBarNavigation(adminItems, role);
+            userRole = sideBarNavigation(adminItems, roles.ADMIN);
             break;
         case roles.FACULTY:
-            userRole = sideBarNavigation(facultyItems, role);
+            userRole = sideBarNavigation(facultyItems, roles.FACULTY);
             break;
         case roles.STUDENT:
-            userRole = sideBarNavigation(studentItems, role);
+            userRole = sideBarNavigation(studentItems, roles.STUDENT);
             break;
         default:
             break;
