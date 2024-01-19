@@ -17,3 +17,7 @@ export type TItems = {
     element?: ReactNode;
     children?: TRoute[]
 }
+
+// export type TLoginData = {
+
+// }

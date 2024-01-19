@@ -5,6 +5,7 @@ import { routeGenerator } from "../utils/routeGenerator";
 import { facultyItems } from "./faculty.items";
 import { studentItems } from "./student.items";
 import Login from "../pages/Login";
+// import Login from "../pages/Login";
 
 
 export const router = createBrowserRouter([
