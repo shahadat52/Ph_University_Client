@@ -87,7 +87,6 @@ export const adminRoutes = adminItems.reduce((acc: TRoute[], item) => {
 //Programmatically sideBar navigation routes
 export const adminSideBar = adminItems.reduce((acc: TSidebarItem[], item) => {
     if (item.path && item.name) {
-        console.log(item.path);
         acc.push({
             key: item.name,
             label: <NavLink to={`/admin/${item.path}`}>{item.name}</NavLink>
@@ -107,5 +106,3 @@ export const adminSideBar = adminItems.reduce((acc: TSidebarItem[], item) => {
 
     return acc
 }, [])
-
-console.log({ adminSideBar });
