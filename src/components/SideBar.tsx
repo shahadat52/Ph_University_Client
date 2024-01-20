@@ -3,10 +3,13 @@ import { sideBarNavigation } from '../utils/sideBarNavigation';
 import { adminItems } from '../routes/admin.routes';
 import { facultyItems } from '../routes/faculty.items';
 import { studentItems } from '../routes/student.items';
+import { useAppSelector } from '../redux/hooks';
 const { Sider } = Layout;
 const SideBar = () => {
 
-    const role = 'student'
+    const { user } = useAppSelector((state) => state.auth)
+    const role = user?.role
+    console.log(role);
     const roles = {
         ADMIN: 'admin',
         FACULTY: 'faculty',
