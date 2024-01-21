@@ -9,7 +9,6 @@ const SideBar = () => {
 
     const { user } = useAppSelector((state) => state.auth)
     const role = user?.role
-    console.log(role);
     const roles = {
         ADMIN: 'admin',
         FACULTY: 'faculty',
