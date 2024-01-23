@@ -24,16 +24,19 @@ export const store = configureStore({
         [baseApi.reducerPath]: baseApi.reducer,
         auth: persistedReducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-        serializableCheck: {
-            ignoredActions: [FLUSH,
-                REHYDRATE,
-                PAUSE,
-                PERSIST,
-                PURGE,
-                REGISTER,]
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(
+        // prevent non-serializable error
+        {
+            serializableCheck: {
+                ignoredActions: [FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,]
+            }
         }
-    }).concat(baseApi.middleware),
+    ).concat(baseApi.middleware),
 });
 
 
