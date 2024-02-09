@@ -1,4 +1,5 @@
-import { Button,Row } from "antd";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Button, Row } from "antd";
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -18,7 +19,7 @@ const Login = () => {
     const [login] = useLoginMutation()
 
     const defaultValues = {
-        id: 'A-0002',
+        id: 'A-0001',
         password: 'admin123'
     }
 
@@ -26,7 +27,6 @@ const Login = () => {
     const methods = useForm({ defaultValues })
 
     const currentUser = useAppSelector((state) => state?.auth.user)
-    console.log(currentUser);
 
 
     const onSubmit = async (data: FieldValues) => {
@@ -44,9 +44,15 @@ const Login = () => {
             const user = verifyToken(token)
             dispatch(setUser({ user, token }))
             toast.success('Login successful', { id: toastId, duration: 2000 })
-            navigate(`/${user?.role}/dashboard`)
+            navigate(`/${(user as any)?.role}/dashboard`)
         } catch (error) {
+            if ((error as any)?.status === 404) {
+                toast.error('User not found', { id: toastId, duration: 2000 })
+                return
+            }
             toast.error('Something went wrong', { id: toastId, duration: 2000 })
+
+
         }
 
 
