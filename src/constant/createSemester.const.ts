@@ -19,5 +19,20 @@ export const semesterOptions = [
     { value: '03', label: 'Fall' },
 ];
 
+export type TYears = {
+    value: number;
+    label: number
+}
+
+const currentYear = new Date().getFullYear()
+const yearsArray:TYears[] = [] 
+yearsArray.push({ value: currentYear, label: currentYear });
+
+for (let i = 1; i <= 4; i++) {
+    yearsArray.push({ value: currentYear + i, label: currentYear + i });
+}
+
+export default yearsArray
+
 
 

@@ -3,7 +3,10 @@
 import { Button, Col, Flex, Form, } from 'antd';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import SelectField from '../../../components/form/SelectField';
-import { months, semesterOptions } from '../../../constant/createSemester.const';
+import yearsArray, {  months, semesterOptions } from '../../../constant/createSemester.const';
+import { useAddAcademicSemesterMutation } from '../../../redux/features/admin/academicManagement.api';
+import { toast } from 'sonner';
+import { TResponse } from '../../../types.ts/global';
 
 interface FormData {
     name: string;
@@ -14,32 +17,38 @@ interface FormData {
 
 const CreateSemester = () => {
     const method = useForm()
-    const currentYear = new Date().getFullYear()
-    const yearsArray = []
-    yearsArray.push({ year: currentYear, label: currentYear });
+    const [addAcademicSemester] = useAddAcademicSemesterMutation()
 
-    for (let i = 1; i <= 4; i++) {
-        yearsArray.push({ value: currentYear + i, label: currentYear + i });
-    }
+   
 
 
-    const onSubmit: SubmitHandler<any> = (data: FormData) => {
+    const onSubmit: SubmitHandler<any> = async (data: FormData) => {
+        const toastId = toast.loading('Semester crating',{duration:2000})
         const semester = semesterOptions.filter(option => option.value === (data as any).semesterName)
         const semesterName = semester[0]?.label
         const semesterData = {
             name: semesterName,
             code: (data as any)?.semesterName,
-            year: data?.year,
+            year: String(data?.year),
             startMonth: data?.startMonth,
             endMonth: data?.endMonth
+        }
+        try {
+            const res = await addAcademicSemester(semesterData) as TResponse
+            if (res?.data?.success) {
+                console.log(res.data);
+                toast.success(`${res?.data?.message}😃😃`, { id: toastId, duration:2000 })
+            } else if (res.error) {
+                toast.error(`${res.error.data.message}😡😡`, { id: toastId, duration:2000 })
+            }
+
+
+        } catch (error) {
+            toast.error('Failed to create academic semester', { id: toastId, duration:2000 })
 
         }
-        console.log(semesterData);
+       
     }
-
-    const date = new Date().getFullYear()
-
-    console.log(date);
 
 
     return (
